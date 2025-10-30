@@ -102,23 +102,15 @@ export const useMaterialsStore = defineStore('materials', {
           this.currentMaterial.description_html = ''
         }
 
-        const response = await $fetch<{ success: boolean; id: number; errors: [] }>(
-          '/proxy/materials/save',
-          {
-            method: 'POST',
-            body: {
-              title: this.currentMaterial.title,
-              short_description: this.currentMaterial.short_description,
-              datetime: this.currentMaterial.datetime,
-              description_json: this.currentMaterial.description_json,
-              description_html: this.currentMaterial.description_html
-            }
+        await $fetch<{ success: boolean; id: number; errors: [] }>('/proxy/materials/save', {
+          method: 'POST',
+          body: {
+            title: this.currentMaterial.title,
+            short_description: this.currentMaterial.short_description,
+            datetime: this.currentMaterial.datetime,
+            description_json: this.currentMaterial.description_json,
+            description_html: this.currentMaterial.description_html
           }
-        )
-
-        this.list.unshift({
-          ...this.currentMaterial,
-          id: response.id
         })
 
         this.setNotification(NOTIFICATIONS.SUCCESS_SAVING, 'success')

@@ -5,9 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useMaterialsStore } from '~/stores/materials'
-
 const store = useMaterialsStore()
 const notification = computed(() => store.notification)
 </script>

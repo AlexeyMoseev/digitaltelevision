@@ -48,6 +48,7 @@ const handleClick = async () => {
   if (!isCreating.value) return
   const ok = await store.saveCurrentMaterial()
   if (ok) {
+    store.list = []
     await navigateTo('/')
   }
 }

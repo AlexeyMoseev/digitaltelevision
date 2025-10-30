@@ -36,7 +36,16 @@ interface Props {
 const props = defineProps<Props>()
 
 const formatDate = (isoDate: string) => {
-  const date = new Date(isoDate)
+  // Using this formatting because the server removes the 'T' and 'Z' from the date,
+  // which can cause incorrect date display across different time zones
+  let normalizedDate = isoDate
+
+  // Only fix the format if it's broken (contains space instead of 'T')
+  if (isoDate.includes(' ') && !isoDate.includes('T')) {
+    normalizedDate = isoDate.replace(' ', 'T') + 'Z'
+  }
+
+  const date = new Date(normalizedDate)
   return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })
 }
 
