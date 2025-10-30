@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 const store = useMaterialsStore()
-if (store.list.length === 0) store.fetchList()
+store.fetchList()
 </script>
 
 <style scoped>
