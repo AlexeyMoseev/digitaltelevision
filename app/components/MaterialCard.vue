@@ -1,29 +1,27 @@
 <template>
-  <div class="card-wrapper" :class="`card-wrapper-${variant}`">
-    <div class="card" :class="`card-${variant}`">
-      <div class="date" :class="`date-${variant}`">
-        <img
-          :class="`calendar-img-${variant}`"
-          src="~/assets/images/calendar.svg"
-          alt="calendar img"
-        />
-        <span>{{ formatDate(material.datetime) }}</span>
-      </div>
-      <h1 v-if="variant === 'detail'" class="title" :class="`title-${variant}`">
-        {{ material.title }}
-      </h1>
-      <h2 v-if="variant === 'list'" class="title" :class="`title-${variant}`">
-        {{ material.title }}
-      </h2>
-      <p class="short-description" :class="`short-description-${variant}`">
-        {{ variant === 'list' ? truncatedDescription : material.short_description }}
-      </p>
-      <div
-        v-if="variant === 'detail' && material.description_html"
-        class="description-html"
-        v-html="material.description_html"
+  <div class="card" :class="`card-${variant}`">
+    <div class="date" :class="`date-${variant}`">
+      <img
+        :class="`calendar-img-${variant}`"
+        src="~/assets/images/calendar.svg"
+        alt="calendar img"
       />
+      <span>{{ formatDate(material.datetime) }}</span>
     </div>
+    <h1 v-if="variant === 'detail'" class="title" :class="`title-${variant}`">
+      {{ material.title }}
+    </h1>
+    <h2 v-if="variant === 'list'" class="title" :class="`title-${variant}`">
+      {{ material.title }}
+    </h2>
+    <p class="short-description" :class="`short-description-${variant}`">
+      {{ variant === 'list' ? truncatedDescription : material.short_description }}
+    </p>
+    <div
+      v-if="variant === 'detail' && material.description_html"
+      class="description-html"
+      v-html="material.description_html"
+    />
   </div>
 </template>
 
@@ -62,7 +60,9 @@ const truncatedDescription = computed(() => {
 </script>
 
 <style scoped>
-.card-wrapper {
+.card {
+  display: flex;
+  flex-direction: column;
   background: #ffffff;
   box-sizing: border-box;
   box-shadow:
@@ -71,11 +71,6 @@ const truncatedDescription = computed(() => {
     -21px 48px 31px 0px #00000005,
     -37px 85px 37px 0px #00000003,
     -57px 133px 40px 0px #00000000;
-}
-.card {
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
 }
 .date {
   display: flex;
@@ -104,14 +99,12 @@ const truncatedDescription = computed(() => {
 }
 
 /* Вариация list */
-.card-wrapper-list {
-  border-radius: 24px;
-}
 .card-list {
   width: 276px;
   height: 273px;
   padding: 32px 24px;
   gap: 20px 0;
+  border-radius: 24px;
 }
 .date-list {
   gap: 0 8px;
@@ -132,16 +125,11 @@ const truncatedDescription = computed(() => {
 }
 
 /* Вариация detail */
-.card-wrapper-detail {
-  border-radius: 32px;
-  padding: 20px 0px;
-}
 .card-detail {
-  overflow-y: auto;
   width: 100%;
-  max-height: 658px;
   gap: 24px 0;
-  padding: 44px 64px;
+  padding: 64px;
+  border-radius: 32px;
 }
 .date-detail {
   font-size: 20px;
@@ -187,13 +175,9 @@ const truncatedDescription = computed(() => {
   }
 
   /* Вариация detail */
-  .card-wrapper-detail {
-    border-radius: 24px;
-    padding: 20px 0;
-  }
   .card-detail {
-    max-height: 801px;
-    padding: 4px 16px;
+    padding: 24px 16px;
+    border-radius: 24px;
   }
   .date-detail {
     font-size: 18px;

@@ -1,20 +1,18 @@
 <template>
-  <div class="card-wrapper">
-    <div class="card">
-      <input
-        v-model="store.currentMaterial.title"
-        class="title-field"
-        maxlength="80"
-        placeholder="Введите заголовок"
-      />
-      <textarea
-        v-model="store.currentMaterial.short_description"
-        class="short-description-field"
-        maxlength="255"
-        placeholder="Введите краткое описание..."
-      />
-      <EditorJs v-model:content="editorContent" class="editor" />
-    </div>
+  <div class="card">
+    <input
+      v-model="store.currentMaterial.title"
+      class="title-field"
+      maxlength="80"
+      placeholder="Введите заголовок"
+    />
+    <textarea
+      v-model="store.currentMaterial.short_description"
+      class="short-description-field"
+      maxlength="255"
+      placeholder="Введите краткое описание..."
+    />
+    <EditorJs v-model:content="editorContent" class="editor" />
   </div>
 </template>
 
@@ -43,26 +41,20 @@ watch(editorContent, (val) => {
 </script>
 
 <style scoped>
-.card-wrapper {
-  padding: 20px 0px;
+.card {
+  width: 100%;
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
   border-radius: 32px;
   background: #ffffff;
-  box-sizing: border-box;
   box-shadow:
     -2px 5px 13px 0px #0000000a,
     -9px 21px 23px 0px #0000000a,
     -21px 48px 31px 0px #00000005,
     -37px 85px 37px 0px #00000003,
     -57px 133px 40px 0px #00000000;
-}
-.card {
-  overflow-y: auto;
-  width: 100%;
-  height: 598px;
-  padding: 28px 24px;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
 }
 .title-field,
 .short-description-field {
@@ -109,14 +101,9 @@ watch(editorContent, (val) => {
   }
 }
 @media (max-width: 480px) {
-  .card-wrapper {
-    padding: 10px 0px;
-    border-radius: 16px;
-  }
   .card {
-    overflow-y: auto;
-    height: 540px;
-    padding: 10px 16px;
+    padding: 20px 16px;
+    border-radius: 16px;
   }
   .title-field {
     margin-bottom: 12px;

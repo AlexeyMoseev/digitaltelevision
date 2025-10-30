@@ -66,6 +66,9 @@ onBeforeUnmount(() => {
 :deep(.ce-toolbar__actions) {
   padding-right: 24px;
 }
+:deep(.codex-editor__redactor) {
+  padding-bottom: 0 !important;
+}
 :deep(.ce-block__content) {
   font-family: 'FuturaPT', Roboto, Arial, sans-serif;
   font-weight: 400;
