@@ -105,6 +105,7 @@ const truncatedDescription = computed(() => {
   font-weight: 400;
   font-size: 20px;
   line-height: 140%;
+  overflow-wrap: break-word;
 }
 
 /* Вариация list */
