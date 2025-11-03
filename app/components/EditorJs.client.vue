@@ -6,7 +6,11 @@
 
 <script setup lang="ts">
 import type EditorJS from '@editorjs/editorjs'
-import type { ToolConstructable } from '@editorjs/editorjs'
+import type { OutputData, ToolConstructable } from '@editorjs/editorjs'
+
+const props = defineProps<{
+  content: OutputData | null
+}>()
 
 const emit = defineEmits(['update:content'])
 
@@ -54,6 +58,23 @@ onMounted(async () => {
   editorRef.value = editor
 })
 
+// Watch for external content changes
+watch(
+  () => props.content,
+  async (val) => {
+    const editor = editorRef.value
+    if (!editor) return
+    if (!val) {
+      await editor.blocks.render({
+        time: Date.now(),
+        blocks: [{ type: 'paragraph', data: { text: '' } }]
+      })
+      return
+    }
+    await editor.blocks.render(val)
+  }
+)
+
 onBeforeUnmount(() => {
   if (editorRef.value) {
     editorRef.value.destroy()
@@ -76,7 +97,7 @@ onBeforeUnmount(() => {
   line-height: 140%;
   color: #14142a;
 }
-:deep(.codex-editor [data-placeholder-active]:empty:before, ) {
+:deep(.codex-editor [data-placeholder-active]:empty:before) {
   color: #bec2da;
 }
 @media (max-width: 1044px) {

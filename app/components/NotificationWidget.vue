@@ -1,5 +1,5 @@
 <template>
-  <div v-if="notification?.visible" :class="['notification', notification.type]">
+  <div v-if="notification?.visible" class="notification" :class="notification.type">
     {{ notification.message }}
   </div>
 </template>

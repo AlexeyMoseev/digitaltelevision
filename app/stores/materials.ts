@@ -9,7 +9,7 @@ const NOTIFICATIONS = {
   ERROR_SAVING: 'Ошибка при сохранении',
   SUCCESS_SAVING: 'Страница сохранена',
   ERROR_FILL_FIELDS: 'Заполните все поля'
-}
+} as const
 
 const initialCurrentMaterial: NewMaterial = {
   title: '',
@@ -69,6 +69,10 @@ export const useMaterialsStore = defineStore('materials', {
       this.currentMaterial = { ...initialCurrentMaterial }
     },
 
+    clearList() {
+      this.list = []
+    },
+
     setNotification(message: string, type: 'success' | 'error') {
       this.notification = { message, type, visible: true }
       setTimeout(() => {
@@ -77,10 +81,12 @@ export const useMaterialsStore = defineStore('materials', {
     },
 
     async saveCurrentMaterial(): Promise<boolean> {
+      const material = this.currentMaterial
+
       if (
-        !this.currentMaterial.title.trim() ||
-        !this.currentMaterial.short_description.trim() ||
-        !this.currentMaterial.description_json?.blocks?.length
+        !material.title?.trim() ||
+        !material.short_description?.trim() ||
+        !material.description_json?.blocks?.length
       ) {
         this.setNotification(NOTIFICATIONS.ERROR_FILL_FIELDS, 'error')
         return false
@@ -89,32 +95,27 @@ export const useMaterialsStore = defineStore('materials', {
       this.loading = true
 
       try {
-        this.currentMaterial.datetime = new Date().toISOString()
+        const datetime = new Date().toISOString()
+        const htmlBlocks = edjsParser.parse(material.description_json)
+        const description_html = Array.isArray(htmlBlocks)
+          ? htmlBlocks.join('\n')
+          : String(htmlBlocks)
 
-        if (this.currentMaterial.description_json) {
-          const htmlBlocks = edjsParser.parse(this.currentMaterial.description_json)
-          if (Array.isArray(htmlBlocks)) {
-            this.currentMaterial.description_html = htmlBlocks.join('\n')
-          } else {
-            this.currentMaterial.description_html = String(htmlBlocks)
+        await $fetch<{ success: boolean; id?: number; errors?: string[] }>(
+          '/proxy/materials/save',
+          {
+            method: 'POST',
+            body: {
+              title: material.title,
+              short_description: material.short_description,
+              datetime,
+              description_json: material.description_json,
+              description_html
+            }
           }
-        } else {
-          this.currentMaterial.description_html = ''
-        }
-
-        await $fetch<{ success: boolean; id: number; errors: [] }>('/proxy/materials/save', {
-          method: 'POST',
-          body: {
-            title: this.currentMaterial.title,
-            short_description: this.currentMaterial.short_description,
-            datetime: this.currentMaterial.datetime,
-            description_json: this.currentMaterial.description_json,
-            description_html: this.currentMaterial.description_html
-          }
-        })
+        )
 
         this.setNotification(NOTIFICATIONS.SUCCESS_SAVING, 'success')
-
         this.resetCurrentMaterial()
         return true
       } catch {

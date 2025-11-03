@@ -5,30 +5,23 @@
         <NuxtLink class="logo-link" to="/">
           <img class="logo" alt="logo" src="~/assets/images/logo.svg" />
         </NuxtLink>
-        <ClientOnly>
-          <NuxtLink
-            v-if="!isCreating"
-            class="btn"
-            to="/create"
-            :aria-disabled="store.loading"
-            :class="{ disabled: store.loading }"
-            :tabindex="store.loading ? -1 : 0"
-          >
-            <span v-if="!store.loading" class="btn-text">Создать материал</span>
-            <img
-              v-if="!store.loading"
-              class="btn-icon"
-              src="~/assets/images/plus.svg"
-              alt="create"
-            />
-            <img v-else class="btn-loader-img" src="~/assets/images/loader.svg" alt="loader" />
-          </NuxtLink>
-          <button v-else class="btn" :disabled="store.loading" @click="handleClick">
-            <span v-if="!store.loading" class="btn-text">Сохранить</span>
-            <img v-if="!store.loading" class="btn-icon" src="~/assets/images/send.svg" alt="send" />
-            <img v-else class="btn-loader-img" src="~/assets/images/loader.svg" alt="loader" />
-          </button>
-        </ClientOnly>
+        <NuxtLink
+          v-if="!isCreating"
+          class="btn"
+          to="/create"
+          :aria-disabled="store.loading"
+          :class="{ disabled: store.loading }"
+          :tabindex="store.loading ? -1 : 0"
+        >
+          <span v-if="!store.loading" class="btn-text">Создать материал</span>
+          <img v-if="!store.loading" class="btn-icon" src="~/assets/images/plus.svg" alt="create" />
+          <img v-else class="btn-loader-img" src="~/assets/images/loader.svg" alt="loader" />
+        </NuxtLink>
+        <button v-else class="btn" :disabled="store.loading" @click="handleClick">
+          <span v-if="!store.loading" class="btn-text">Сохранить</span>
+          <img v-if="!store.loading" class="btn-icon" src="~/assets/images/send.svg" alt="send" />
+          <img v-else class="btn-loader-img" src="~/assets/images/loader.svg" alt="loader" />
+        </button>
       </div>
     </header>
     <div class="main">
@@ -47,10 +40,7 @@ const isCreating = computed(() => route.name === 'create')
 const handleClick = async () => {
   if (!isCreating.value) return
   const ok = await store.saveCurrentMaterial()
-  if (ok) {
-    store.list = []
-    await navigateTo('/')
-  }
+  if (ok) store.clearList()
 }
 </script>
 

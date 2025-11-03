@@ -12,31 +12,15 @@
       maxlength="255"
       placeholder="Введите краткое описание..."
     />
-    <EditorJs v-model:content="editorContent" class="editor" />
+    <EditorJs v-model:content="store.currentMaterial.description_json" class="editor" />
   </div>
 </template>
 
 <script setup lang="ts">
 const store = useMaterialsStore()
 
-const editorContent = ref(store.currentMaterial.description_json)
-
-watch(
-  () => store.currentMaterial.title,
-  (val) => {
-    store.setCurrentMaterial({ title: val })
-  }
-)
-
-watch(
-  () => store.currentMaterial.short_description,
-  (val) => {
-    store.setCurrentMaterial({ short_description: val })
-  }
-)
-
-watch(editorContent, (val) => {
-  store.setCurrentMaterial({ description_json: val })
+onMounted(() => {
+  store.resetCurrentMaterial()
 })
 </script>
 

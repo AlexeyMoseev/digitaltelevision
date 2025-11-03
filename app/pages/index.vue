@@ -16,7 +16,8 @@
 
 <script setup lang="ts">
 const store = useMaterialsStore()
-store.fetchList()
+
+await useAsyncData(() => store.fetchList())
 </script>
 
 <style scoped>

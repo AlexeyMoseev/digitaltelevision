@@ -17,6 +17,7 @@
     <p class="short-description" :class="`short-description-${variant}`">
       {{ variant === 'list' ? truncatedDescription : material.short_description }}
     </p>
+    <!-- description_html is sanitized server-side -->
     <div
       v-if="variant === 'detail' && material.description_html"
       class="description-html"

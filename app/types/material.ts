@@ -1,4 +1,4 @@
-import type { EditorJsData } from '~/types/editor'
+import type { OutputData } from '@editorjs/editorjs'
 
 export interface Notification {
   message: string
@@ -11,7 +11,7 @@ export interface NewMaterial {
   short_description: string
   datetime: string
   description_html: string
-  description_json: EditorJsData | null
+  description_json: OutputData | null
 }
 
 export interface Material extends NewMaterial {
