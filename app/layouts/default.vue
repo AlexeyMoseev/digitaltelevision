@@ -2,25 +2,54 @@
   <div class="layout">
     <header class="header">
       <div class="header-content">
-        <NuxtLink class="logo-link" to="/">
-          <img class="logo" alt="logo" src="~/assets/images/logo.svg" />
+        <NuxtLink class="logo-link" to="/" aria-label="Перейти на главную страницу">
+          <img class="logo" alt="" src="~/assets/images/logo.svg" aria-hidden="true" />
         </NuxtLink>
-        <NuxtLink
+        <button
           v-if="!isCreating"
           class="btn"
-          to="/create"
-          :aria-disabled="store.loading"
-          :class="{ disabled: store.loading }"
-          :tabindex="store.loading ? -1 : 0"
+          :disabled="store.loading"
+          :aria-label="store.loading ? 'Загрузка...' : 'Создать новый материал'"
+          @click="router.push('/create')"
         >
           <span v-if="!store.loading" class="btn-text">Создать материал</span>
-          <img v-if="!store.loading" class="btn-icon" src="~/assets/images/plus.svg" alt="create" />
-          <img v-else class="btn-loader-img" src="~/assets/images/loader.svg" alt="loader" />
-        </NuxtLink>
-        <button v-else class="btn" :disabled="store.loading" @click="handleClick">
+          <img
+            v-if="!store.loading"
+            class="btn-icon"
+            src="~/assets/images/plus.svg"
+            alt=""
+            aria-hidden="true"
+          />
+          <img
+            v-else
+            class="btn-loader-img"
+            src="~/assets/images/loader.svg"
+            alt=""
+            aria-hidden="true"
+          />
+        </button>
+        <button
+          v-else
+          class="btn"
+          :disabled="store.loading"
+          :aria-label="store.loading ? 'Сохранение...' : 'Сохранить материал'"
+          @click="handleClick"
+        >
           <span v-if="!store.loading" class="btn-text">Сохранить</span>
-          <img v-if="!store.loading" class="btn-icon" src="~/assets/images/send.svg" alt="send" />
-          <img v-else class="btn-loader-img" src="~/assets/images/loader.svg" alt="loader" />
+          <img
+            v-if="!store.loading"
+            class="btn-icon"
+            src="~/assets/images/send.svg"
+            alt=""
+            aria-hidden="true"
+          />
+          <img
+            v-else
+            class="btn-loader-img"
+            src="~/assets/images/loader.svg"
+            alt=""
+            aria-hidden="true"
+          />
         </button>
       </div>
     </header>
@@ -33,6 +62,7 @@
 
 <script setup lang="ts">
 const route = useRoute()
+const router = useRouter()
 const store = useMaterialsStore()
 
 const isCreating = computed(() => route.name === 'create')
@@ -40,27 +70,30 @@ const isCreating = computed(() => route.name === 'create')
 const handleClick = async () => {
   if (!isCreating.value) return
   const ok = await store.saveCurrentMaterial()
-  if (ok) store.clearList()
+  if (ok) {
+    await router.push('/')
+    await store.fetchList(true)
+  }
 }
 </script>
 
 <style scoped>
 .layout {
   min-height: 100vh;
-  background: #f4f6fb;
+  background: var(--color-background);
 }
 .header {
-  background: white;
+  background: var(--color-white);
   padding: 20px 0;
 }
 .header-content {
-  max-width: 1296px;
+  max-width: var(--max-width-header);
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
 }
 .logo-link {
   display: flex;
@@ -93,11 +126,9 @@ const handleClick = async () => {
 .btn:active {
   background: #d2f3ff;
 }
-.btn.disabled,
 .btn:disabled {
   background: #e7f8fe;
   cursor: not-allowed;
-  pointer-events: none;
 }
 .btn-text {
   display: inline;
@@ -111,7 +142,7 @@ const handleClick = async () => {
   animation: spin 1s linear infinite;
 }
 .main {
-  margin-top: 48px;
+  margin-top: var(--spacing-2xl);
 }
 
 @keyframes spin {
@@ -125,7 +156,7 @@ const handleClick = async () => {
 
 @media (max-width: 480px) {
   .header {
-    padding: 8px 0;
+    padding: var(--spacing-xs) 0;
   }
   .logo-link {
     height: 36px;
@@ -148,7 +179,7 @@ const handleClick = async () => {
     height: 28px;
   }
   .main {
-    margin-top: 32px;
+    margin-top: var(--spacing-xl);
   }
 }
 </style>

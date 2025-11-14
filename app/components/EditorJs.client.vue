@@ -15,6 +15,7 @@ const props = defineProps<{
 const emit = defineEmits(['update:content'])
 
 const editorRef = ref<EditorJS | null>(null)
+const isInternalChange = ref(false)
 
 onMounted(async () => {
   const [{ default: EditorJS }, { default: Header }, { default: Quote }] = await Promise.all([
@@ -49,8 +50,11 @@ onMounted(async () => {
     },
     onChange: async () => {
       if (!editorRef.value) return
+      isInternalChange.value = true
       const data = await editorRef.value.save()
       emit('update:content', data)
+      await nextTick()
+      isInternalChange.value = false
     }
   })
 
@@ -58,10 +62,12 @@ onMounted(async () => {
   editorRef.value = editor
 })
 
-// Watch for external content changes
+// Watch for external content changes (but ignore inner changes)
 watch(
   () => props.content,
   async (val) => {
+    if (isInternalChange.value) return
+
     const editor = editorRef.value
     if (!editor) return
     if (!val) {
@@ -91,14 +97,14 @@ onBeforeUnmount(() => {
   padding-bottom: 0 !important;
 }
 :deep(.ce-block__content) {
-  font-family: 'FuturaPT', Roboto, Arial, sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 140%;
-  color: #14142a;
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
 }
 :deep(.codex-editor [data-placeholder-active]:empty:before) {
-  color: #bec2da;
+  color: var(--color-text-tertiary);
 }
 @media (max-width: 1044px) {
   :deep(.ce-toolbar__actions) {
@@ -118,7 +124,7 @@ onBeforeUnmount(() => {
 }
 @media (max-width: 480px) {
   :deep(.ce-block__content) {
-    font-size: 16px;
+    font-size: var(--font-size-sm);
   }
 }
 </style>

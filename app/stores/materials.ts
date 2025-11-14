@@ -36,8 +36,8 @@ export const useMaterialsStore = defineStore('materials', {
   },
 
   actions: {
-    async fetchList(): Promise<Material[]> {
-      if (this.list.length > 0) return this.list
+    async fetchList(force = false): Promise<Material[]> {
+      if (this.list.length > 0 && !force) return this.list
 
       this.loading = true
 
@@ -67,10 +67,6 @@ export const useMaterialsStore = defineStore('materials', {
 
     resetCurrentMaterial() {
       this.currentMaterial = { ...initialCurrentMaterial }
-    },
-
-    clearList() {
-      this.list = []
     },
 
     setNotification(message: string, type: 'success' | 'error') {

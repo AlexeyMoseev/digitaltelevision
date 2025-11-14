@@ -1,7 +1,38 @@
-html, body {
+@import './variables.css';
+
+html,
+body {
   margin: 0;
   padding: 0;
 }
-h1, h2, h3, h4, h5, h6, span, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+p {
   margin: 0;
+}
+
+/* Utility classes */
+.container {
+  max-width: var(--max-width-content);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.container-detail {
+  max-width: var(--max-width-detail);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.card {
+  background: var(--color-white);
+  box-shadow: var(--shadow-card);
+  box-sizing: border-box;
 }

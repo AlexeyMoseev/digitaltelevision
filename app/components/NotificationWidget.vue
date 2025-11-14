@@ -1,5 +1,11 @@
 <template>
-  <div v-if="notification?.visible" class="notification" :class="notification.type">
+  <div
+    v-if="notification?.visible"
+    class="notification"
+    :class="notification.type"
+    role="alert"
+    :aria-live="notification.type === 'error' ? 'assertive' : 'polite'"
+  >
     {{ notification.message }}
   </div>
 </template>
@@ -15,27 +21,27 @@ const notification = computed(() => store.notification)
   bottom: 20px;
   right: 20px;
   min-width: 250px;
-  padding: 12px 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  font-family: 'FuturaPT', Roboto, Arial, sans-serif;
-  font-size: 18px;
-  color: #fff;
+  padding: var(--spacing-sm) 20px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-notification);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-md);
+  color: var(--color-white);
   z-index: 9999;
   transition:
-    opacity 0.3s,
-    transform 0.3s;
+    opacity var(--transition-normal),
+    transform var(--transition-normal);
 }
 .notification.success {
-  background-color: #4caf50;
+  background-color: var(--color-success);
 }
 .notification.error {
-  background-color: #f44336;
+  background-color: var(--color-error);
 }
 @media (max-width: 480px) {
   .notification {
     min-width: 150px;
-    font-size: 14px;
+    font-size: var(--font-size-xs);
   }
 }
 </style>

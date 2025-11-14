@@ -8,25 +8,25 @@
 
 <style scoped>
 .material-create {
-  max-width: 1014px;
+  max-width: var(--max-width-detail);
   margin: 0 auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
 }
 .title {
-  margin-top: 32px;
-  margin-bottom: 48px;
-  font-family: 'SourceSans3', Roboto, Arial, sans-serif;
-  font-weight: 600;
-  font-size: 36px;
-  line-height: 120%;
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-normal);
   letter-spacing: 0%;
 }
 
 @media (max-width: 480px) {
   .title {
-    margin-bottom: 32px;
-    font-size: 24px;
+    margin-bottom: var(--spacing-xl);
+    font-size: var(--font-size-2xl);
   }
 }
 </style>

@@ -7,6 +7,7 @@
         :key="String(item.id)"
         :to="`/${item.id}`"
         class="list-item"
+        :aria-label="`Открыть материал: ${item.title}`"
       >
         <MaterialCard :material="item" variant="list" />
       </NuxtLink>
@@ -22,17 +23,17 @@ await useAsyncData(() => store.fetchList())
 
 <style scoped>
 .materials {
-  max-width: 1224px;
+  max-width: var(--max-width-content);
   margin: 0 auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
 }
 .title {
-  margin-bottom: 48px;
-  font-family: 'SourceSans3', Roboto, Arial, sans-serif;
-  font-weight: 600;
-  font-size: 36px;
-  line-height: 120%;
+  margin-bottom: var(--spacing-2xl);
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-normal);
   letter-spacing: 0%;
 }
 .list {
@@ -44,16 +45,16 @@ await useAsyncData(() => store.fetchList())
 .list-item {
   text-decoration: none;
   cursor: pointer;
-  color: #14142a;
+  color: var(--color-text-primary);
 }
 
 @media (max-width: 480px) {
   .title {
-    margin-bottom: 32px;
-    font-size: 24px;
+    margin-bottom: var(--spacing-xl);
+    font-size: var(--font-size-2xl);
   }
   .list {
-    gap: 16px;
+    gap: var(--spacing-md);
   }
 }
 </style>

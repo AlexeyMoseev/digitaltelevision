@@ -73,39 +73,34 @@ const truncatedDescription = computed(() => {
 .card {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: var(--color-white);
   box-sizing: border-box;
-  box-shadow:
-    -2px 5px 13px 0px #0000000a,
-    -9px 21px 23px 0px #0000000a,
-    -21px 48px 31px 0px #00000005,
-    -37px 85px 37px 0px #00000003,
-    -57px 133px 40px 0px #00000000;
+  box-shadow: var(--shadow-card);
 }
 .date {
   display: flex;
   align-items: center;
-  color: #bec2da;
-  font-family: 'FuturaPT', Roboto, Arial, sans-serif;
-  font-weight: 400;
+  color: var(--color-text-tertiary);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-normal);
 }
 .title {
-  font-family: 'SourceSans3', Roboto, Arial, sans-serif;
-  font-weight: 600;
-  line-height: 120%;
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
   overflow-wrap: break-word;
 }
 .short-description {
-  font-family: 'FuturaPT', Roboto, Arial, sans-serif;
-  line-height: 120%;
+  font-family: var(--font-family-primary);
+  line-height: var(--line-height-normal);
   overflow-wrap: break-word;
 }
 .description-html {
-  color: #14142a;
-  font-family: 'FuturaPT', Roboto, Arial, sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 140%;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
   overflow-wrap: break-word;
 }
 
@@ -113,97 +108,97 @@ const truncatedDescription = computed(() => {
 .card-list {
   width: 276px;
   height: 273px;
-  padding: 32px 24px;
+  padding: var(--spacing-xl) var(--spacing-lg);
   gap: 20px 0;
-  border-radius: 24px;
+  border-radius: var(--radius-xl);
 }
 .date-list {
-  gap: 0 8px;
-  font-size: 16px;
-  line-height: 100%;
+  gap: 0 var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-tight);
 }
 .calendar-img-list {
   width: 20px;
   height: 20px;
 }
 .title-list {
-  font-size: 20px;
+  font-size: var(--font-size-lg);
 }
 .short-description-list {
-  color: #81859c;
-  font-size: 16px;
-  font-weight: 400;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
 }
 
 /* Вариация detail */
 .card-detail {
   width: 100%;
-  gap: 24px 0;
-  padding: 64px;
-  border-radius: 32px;
+  gap: var(--spacing-lg) 0;
+  padding: var(--spacing-3xl);
+  border-radius: var(--radius-2xl);
 }
 .date-detail {
-  font-size: 20px;
-  line-height: 140%;
-  gap: 0 12px;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  gap: 0 var(--spacing-sm);
 }
 .calendar-img-detail {
   width: 24px;
   height: 24px;
 }
 .title-detail {
-  font-size: 36px;
+  font-size: var(--font-size-3xl);
 }
 .short-description-detail {
-  color: #14142a;
-  font-size: 22px;
-  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
 }
 
 @media (max-width: 480px) {
   .description-html {
-    font-size: 16px;
+    font-size: var(--font-size-sm);
   }
   /* Вариация list */
   .card-list {
     width: 288px;
     height: 236px;
-    padding: 24px;
-    gap: 16px 0;
+    padding: var(--spacing-lg);
+    gap: var(--spacing-md) 0;
   }
   .date-list {
-    font-size: 14px;
+    font-size: var(--font-size-xs);
   }
   .calendar-img-list {
     width: 16px;
     height: 16px;
   }
   .title-list {
-    font-size: 18px;
+    font-size: var(--font-size-md);
   }
   .short-description-list {
-    font-size: 14px;
+    font-size: var(--font-size-xs);
   }
 
   /* Вариация detail */
   .card-detail {
-    padding: 24px 16px;
-    border-radius: 24px;
+    padding: var(--spacing-lg) var(--spacing-md);
+    border-radius: var(--radius-xl);
   }
   .date-detail {
-    font-size: 18px;
-    line-height: 120%;
-    gap: 0 8px;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-normal);
+    gap: 0 var(--spacing-xs);
   }
   .calendar-img-detail {
     width: 20px;
     height: 20px;
   }
   .title-detail {
-    font-size: 24px;
+    font-size: var(--font-size-2xl);
   }
   .short-description-detail {
-    font-size: 18px;
+    font-size: var(--font-size-md);
   }
 }
 </style>

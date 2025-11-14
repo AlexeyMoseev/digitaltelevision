@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink to="/" class="back-link">
+  <NuxtLink to="/" class="back-link" aria-label="Вернуться на главную страницу">
     <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
       <path
         d="M9.57 18.82c-.19 0-.38-.07-.53-.22L2.97 12.53a.75.75 0 0 1 0-1.06l6.07-6.07a.75.75 0 0 1 1.06 1.06L4.56 12l5.54 5.54a.75.75 0 0 1-1.06 1.06Z"
@@ -15,18 +15,18 @@
 .back-link {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--spacing-sm);
   text-decoration: none;
-  color: #14142a;
-  transition: color 0.15s ease;
+  color: var(--color-text-primary);
+  transition: color var(--transition-fast);
 }
 .back-link:hover {
-  color: #00b2ff;
+  color: var(--color-primary);
 }
 .back-link__text {
-  font-family: 'FuturaPT', Roboto, Arial, sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 100%;
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-tight);
 }
 </style>

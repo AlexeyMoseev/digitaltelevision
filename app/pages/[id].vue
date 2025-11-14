@@ -11,7 +11,7 @@
 const route = useRoute()
 const store = useMaterialsStore()
 
-if (store.list.length === 0) store.fetchList()
+if (store.list.length === 0) await store.fetchList()
 
 const item = computed(() => {
   const id = route.params.id as string | undefined
@@ -21,18 +21,18 @@ const item = computed(() => {
 
 <style scoped>
 .material-detail {
-  max-width: 1014px;
+  max-width: var(--max-width-detail);
   margin: 0 auto;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
 }
 .content {
-  margin-top: 48px;
+  margin-top: var(--spacing-2xl);
 }
 
 @media (max-width: 480px) {
   .content {
-    margin-top: 32px;
+    margin-top: var(--spacing-xl);
   }
 }
 </style>

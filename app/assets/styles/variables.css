@@ -1,0 +1,74 @@
+:root {
+  /* Colors */
+  --color-primary: #00b2ff;
+  --color-primary-light: #e7f8fe;
+  --color-primary-lighter: #d2f3ff;
+  --color-text-primary: #14142a;
+  --color-text-secondary: #81859c;
+  --color-text-tertiary: #bec2da;
+  --color-background: #f4f6fb;
+  --color-white: #ffffff;
+  --color-success: #4caf50;
+  --color-error: #f44336;
+
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+
+  /* Shadows */
+  --shadow-card: -2px 5px 13px 0px #0000000a, -9px 21px 23px 0px #0000000a,
+    -21px 48px 31px 0px #00000005, -37px 85px 37px 0px #00000003, -57px 133px 40px 0px #00000000;
+  --shadow-notification: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  /* Typography */
+  --font-family-primary: 'FuturaPT', Roboto, Arial, sans-serif;
+  --font-family-heading: 'SourceSans3', Roboto, Arial, sans-serif;
+
+  --font-size-xs: 14px;
+  --font-size-sm: 16px;
+  --font-size-md: 18px;
+  --font-size-lg: 20px;
+  --font-size-xl: 22px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 36px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 450;
+  --font-weight-semibold: 600;
+
+  --line-height-tight: 100%;
+  --line-height-normal: 120%;
+  --line-height-relaxed: 140%;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+
+  /* Layout */
+  --max-width-content: 1224px;
+  --max-width-detail: 1014px;
+  --max-width-header: 1296px;
+  --container-padding: 16px;
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-size-md: 14px;
+    --font-size-lg: 16px;
+    --font-size-xl: 18px;
+    --font-size-2xl: 18px;
+    --font-size-3xl: 24px;
+  }
+}

@@ -5,12 +5,14 @@
       class="title-field"
       maxlength="80"
       placeholder="Введите заголовок"
+      aria-label="Заголовок материала"
     />
     <textarea
       v-model="store.currentMaterial.short_description"
       class="short-description-field"
       maxlength="255"
       placeholder="Введите краткое описание..."
+      aria-label="Краткое описание материала"
     />
     <EditorJs v-model:content="store.currentMaterial.description_json" class="editor" />
   </div>
@@ -27,44 +29,39 @@ onMounted(() => {
 <style scoped>
 .card {
   width: 100%;
-  padding: 48px 24px;
+  padding: var(--spacing-2xl) var(--spacing-lg);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  border-radius: 32px;
-  background: #ffffff;
-  box-shadow:
-    -2px 5px 13px 0px #0000000a,
-    -9px 21px 23px 0px #0000000a,
-    -21px 48px 31px 0px #00000005,
-    -37px 85px 37px 0px #00000003,
-    -57px 133px 40px 0px #00000000;
+  border-radius: var(--radius-2xl);
+  background: var(--color-white);
+  box-shadow: var(--shadow-card);
 }
 .title-field,
 .short-description-field {
   margin-left: 106px;
   border: none;
   padding: 0;
-  line-height: 120%;
-  color: #14142a;
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
 }
 .title-field {
-  margin-bottom: 24px;
-  font-family: 'SourceSans3', Roboto, Arial, sans-serif;
-  font-weight: 600;
-  font-size: 36px;
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-3xl);
 }
 .short-description-field {
   margin-bottom: 40px;
-  font-family: 'FuturaPT', Roboto, Arial, sans-serif;
-  font-weight: 400;
-  font-size: 22px;
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-xl);
   resize: vertical;
   min-height: 26px;
 }
 .title-field::placeholder,
 .short-description-field::placeholder {
-  color: #bec2da;
+  color: var(--color-text-tertiary);
 }
 .title-field:focus,
 .short-description-field:focus {
@@ -86,16 +83,16 @@ onMounted(() => {
 }
 @media (max-width: 480px) {
   .card {
-    padding: 20px 16px;
-    border-radius: 16px;
+    padding: 20px var(--spacing-md);
+    border-radius: var(--radius-lg);
   }
   .title-field {
-    margin-bottom: 12px;
-    font-size: 24px;
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-2xl);
   }
   .short-description-field {
-    margin-bottom: 24px;
-    font-size: 18px;
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-md);
     min-height: 22px;
   }
   .editor {
